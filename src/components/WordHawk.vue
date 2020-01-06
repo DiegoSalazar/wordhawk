@@ -32,8 +32,18 @@ export default {
   },
   methods: {
     keyPressed (e) {
-      const uniqPressed = new Set([String.fromCharCode(e.keyCode), ...this.keysPressed])
-      this.keysPressed = [...uniqPressed]
+      const letter = String.fromCharCode(e.keyCode)
+      const i = this.keysPressed.indexOf(letter)
+
+      if (i >= 0) {
+        this.keysPressed = this.keysPressed.splice(i, 1)
+      } else {
+        this.keysPressed = [...this.keysPressed, letter]
+      }
+    },
+    removePressed (letter) {
+      const i = this.keysPressed.indexOf(letter)
+      this.keysPressed = this.keysPressed.splice(i, 1)
     }
   },
   mounted () {
